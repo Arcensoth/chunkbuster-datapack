@@ -4,6 +4,8 @@ Lag-friendly and CPU-optimized chunk pre-generator.
 [![imp-module-badge]](https://github.com/Arcensoth/imp-datapack)
 [![github-release-badge]](https://github.com/Arcensoth/chunkbuster-datapack/releases)
 
+[![Showcase](https://i.imgur.com/DXk1r7z.png)](https://i.imgur.com/DXk1r7z.png)
+
 - [Installation](#installation)
 - [Usage](#usage)
 - [FAQ](#faq)
