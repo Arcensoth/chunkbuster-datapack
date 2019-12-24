@@ -12,7 +12,9 @@ Lag-friendly and CPU-optimized chunk pre-generator.
   - [How does it work?](#how-does-it-work)
 
 ## Installation
-Run `function chunkbuster:.module/setup` to add required scoreboard objectives. Don't forget to also install the [dependencies](#dependencies).
+1. Download and install the [dependencies](#dependencies) to your world.
+2. Run `function chunkbuster:.module/setup` to add required scoreboard objectives.
+3. Run `function chunkbuster:-user/001_admin` to gain access to the pre-generation trigger.
 
 ### Dependencies
 Datapack        | Version
@@ -20,9 +22,12 @@ Datapack        | Version
 [Tickbuster]    | `v0.1.0`
 
 ## Usage
-Stand in the middle of the area you want to pre-generate and then run `trigger ckb.run set <diameter_in_blocks>`, replacing `<diameter_in_blocks>` with the desired diameter (in blocks).
-
-You can have multiple areas pre-generating at the same time, but they're still sharing CPU time so it's not going to go any faster.
+- Make sure you've marked yourself as a module administrator by running `function chunkbuster:-user/001_admin`.
+- There are two ways to specify areas for pre-generation:
+  1. Standing in the center of the area you want to pre-grenerate, and then running `trigger ckb.run set <diameter_in_blocks>`.
+  2. Supplying explicit arguments via `storage` and then running `trigger ckb.run`. You can get a clickable pre-filled command for this by running `trigger ckb.run` to see which arguments are missing.
+- You can have multiple areas pre-generating at the same time, but they're still sharing CPU time so it's not going to go any faster.
+- Pre-generation state should be preserved between crashes and relogs, however changing the world spawn may halt any ongoing pre-generation. This is because the entities that record pre-generation state are moved to world spawn between each tick. It is recommended that you wait until pre-generation is complete before changing the world spawn.
 
 ## FAQ
 ### What does it do?
