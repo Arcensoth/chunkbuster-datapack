@@ -2,58 +2,43 @@
 #
 # @context cursor
 #
-# @storage_args chunkbuster:__args__/util/create_cursor
-#   x_diameter_in_chunks: int
-#   z_diameter_in_chunks: int
-#   x_center_in_chunks: int
-#   z_center_in_chunks: int
+# @scoreboard_args ckb.args
+#   $cursor.create.xstart
+#   $cursor.create.zstart
+#   $cursor.create.xlength
+#   $cursor.create.zlength
 
 tag @s remove chunkbuster.__temp__.new_cursor
 
-# set constants
-scoreboard players set $16 __const__ 16
-scoreboard players set $8 __const__ 8
+# round starting x to chunk coords and center in chunk
+scoreboard players operation @s ckb.xstartblk = $cursor.create.xstart ckb.args
+scoreboard players operation @s ckb.xstartblk /= $16 ckb.const
+scoreboard players operation @s ckb.xstartblk *= $16 ckb.const
+scoreboard players operation @s ckb.xstartblk += $8 ckb.const
 
-# keep original args
-data modify entity @s Item.tag._chunkbuster.cursor.x_diameter_in_chunks set from storage chunkbuster:__args__/util/create_cursor x_diameter_in_chunks
-data modify entity @s Item.tag._chunkbuster.cursor.z_diameter_in_chunks set from storage chunkbuster:__args__/util/create_cursor z_diameter_in_chunks
-data modify entity @s Item.tag._chunkbuster.cursor.x_center_in_chunks set from storage chunkbuster:__args__/util/create_cursor x_center_in_chunks
-data modify entity @s Item.tag._chunkbuster.cursor.z_center_in_chunks set from storage chunkbuster:__args__/util/create_cursor z_center_in_chunks
+# round starting z to chunk coords and center in chunk
+scoreboard players operation @s ckb.zstartblk = $cursor.create.zstart ckb.args
+scoreboard players operation @s ckb.zstartblk /= $16 ckb.const
+scoreboard players operation @s ckb.zstartblk *= $16 ckb.const
+scoreboard players operation @s ckb.zstartblk += $8 ckb.const
 
-# x chunk
-execute store result entity @s Item.tag._chunkbuster.cursor.x_radius_in_chunks int 0.5 run data get storage chunkbuster:__args__/util/create_cursor x_diameter_in_chunks
-execute store result score $chunkbuster.cursor.init.x_rad_chunks __temp__ run data get entity @s Item.tag._chunkbuster.cursor.x_radius_in_chunks
-execute store result score $chunkbuster.cursor.init.x_start_chunks __temp__ run data get entity @s Item.tag._chunkbuster.cursor.x_center_in_chunks
-scoreboard players operation $chunkbuster.cursor.init.x_start_chunks __temp__ -= $chunkbuster.cursor.init.x_rad_chunks __temp__
-execute store result entity @s Item.tag._chunkbuster.cursor.x_start_in_chunks int 1.0 run scoreboard players get $chunkbuster.cursor.init.x_start_chunks __temp__
+# calculate x length in chunks
+scoreboard players operation @s ckb.xlengthchk = $cursor.create.xlength ckb.args
+scoreboard players operation @s ckb.xlengthchk /= $16 ckb.const
 
-# x block
-scoreboard players operation $chunkbuster.cursor.init.x_start_blocks __temp__ = $chunkbuster.cursor.init.x_start_chunks __temp__
-scoreboard players operation $chunkbuster.cursor.init.x_start_blocks __temp__ *= $16 __const__
-scoreboard players operation $chunkbuster.cursor.init.x_start_blocks __temp__ += $8 __const__
-execute store result entity @s Item.tag._chunkbuster.cursor.x_start_in_blocks int 1.0 run scoreboard players get $chunkbuster.cursor.init.x_start_blocks __temp__
+# calculate z length in chunks
+scoreboard players operation @s ckb.zlengthchk = $cursor.create.zlength ckb.args
+scoreboard players operation @s ckb.zlengthchk /= $16 ckb.const
 
-# z chunk
-execute store result entity @s Item.tag._chunkbuster.cursor.z_radius_in_chunks int 0.5 run data get storage chunkbuster:__args__/util/create_cursor z_diameter_in_chunks
-execute store result score $chunkbuster.cursor.init.z_rad_chunks __temp__ run data get entity @s Item.tag._chunkbuster.cursor.z_radius_in_chunks
-execute store result score $chunkbuster.cursor.init.z_start_chunks __temp__ run data get entity @s Item.tag._chunkbuster.cursor.z_center_in_chunks
-scoreboard players operation $chunkbuster.cursor.init.z_start_chunks __temp__ -= $chunkbuster.cursor.init.z_rad_chunks __temp__
-execute store result entity @s Item.tag._chunkbuster.cursor.z_start_in_chunks int 1.0 run scoreboard players get $chunkbuster.cursor.init.z_start_chunks __temp__
+# initialize number of remaining chunks
+scoreboard players operation @s ckb.xleftchk = @s ckb.xlengthchk
+scoreboard players operation @s ckb.zleftchk = @s ckb.zlengthchk
 
-# z block
-scoreboard players operation $chunkbuster.cursor.init.z_start_blocks __temp__ = $chunkbuster.cursor.init.z_start_chunks __temp__
-scoreboard players operation $chunkbuster.cursor.init.z_start_blocks __temp__ *= $16 __const__
-scoreboard players operation $chunkbuster.cursor.init.z_start_blocks __temp__ += $8 __const__
-execute store result entity @s Item.tag._chunkbuster.cursor.z_start_in_blocks int 1.0 run scoreboard players get $chunkbuster.cursor.init.z_start_blocks __temp__
+# initialize next chunk position to the starting position
+scoreboard players operation @s ckb.xnextblk = @s ckb.xstartblk
+scoreboard players operation @s ckb.znextblk = @s ckb.zstartblk
 
-# init scores
-execute store result score @s ckb.diamx run data get storage chunkbuster:__args__/util/create_cursor x_diameter_in_chunks
-execute store result score @s ckb.diamz run data get storage chunkbuster:__args__/util/create_cursor z_diameter_in_chunks
-scoreboard players set @s ckb.stepx 0
-scoreboard players set @s ckb.stepz 0
-
-# move to initial position at worldspawn
+# send to world spawn for safe-keeping
 function chunkbuster:util/to_worldspawn
 
-# notify admins
-tellraw @a[tag=chunkbuster.admin] ["", {"text": "[Chunkbuster]", "color": "green"}, " ", "A cursor has been initialized: ", {"nbt": "Item.tag._chunkbuster.cursor", "entity": "@s"}]
+tellraw @a[tag=chunkbuster.admin] [{"text": "", "color": "gray"}, {"text": "[Chunkbuster]", "color": "green"}, " ", "Starting pre-generation for area ", {"nbt": "Item.tag._chunkbuster.cursor.name", "entity":"@s", "color": "aqua"}, " at: ", {"score": {"name": "@s", "objective": "ckb.xstartblk"}, "color": "yellow"}, " ", {"score": {"name": "@s", "objective": "ckb.zstartblk"}, "color": "yellow"}]
