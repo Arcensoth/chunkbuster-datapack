@@ -47,3 +47,6 @@ function chunkbuster:util/to_worldspawn
 # TODO provide a confirmation prompt with the final values
 
 tellraw @a[tag=chunkbuster.admin] [{"text": "", "color": "gray"}, {"text": "[Chunkbuster]", "color": "green"}, " ", "Starting pre-generation for ", {"score": {"name": "@s", "objective": "ckb.xlengthchk"}, "color": "yellow"}, "x", {"score": {"name": "@s", "objective": "ckb.zlengthchk"}, "color": "yellow"}, " chunk area ", {"nbt": "Item.tag._chunkbuster.cursor.area.name", "entity": "@s", "color": "aqua"}, " at block: ", {"score": {"name": "@s", "objective": "ckb.xstartblk"}, "color": "yellow"}, " ~ ", {"score": {"name": "@s", "objective": "ckb.zstartblk"}, "color": "yellow"}]
+
+# update progress display immediately
+scoreboard players set $progress.update ckb.temp 0

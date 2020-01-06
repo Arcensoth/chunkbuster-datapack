@@ -15,3 +15,8 @@ scoreboard objectives add ckb.xlengthchk dummy
 scoreboard objectives add ckb.zlengthchk dummy
 scoreboard objectives add ckb.xleftchk dummy
 scoreboard objectives add ckb.zleftchk dummy
+
+# progress bar
+bossbar add chunkbuster:progress "Chunkbuster"
+bossbar set chunkbuster:progress style notched_10
+bossbar set chunkbuster:progress color green

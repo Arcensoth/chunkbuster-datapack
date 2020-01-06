@@ -15,3 +15,6 @@ scoreboard objectives remove ckb.xlengthchk
 scoreboard objectives remove ckb.zlengthchk
 scoreboard objectives remove ckb.xleftchk
 scoreboard objectives remove ckb.zleftchk
+
+# progress bar
+bossbar remove chunkbuster:progress
