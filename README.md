@@ -30,6 +30,7 @@ Datapack        | Version
   2. Supplying explicit arguments via `storage` and then running `trigger ckb.run`. You can get a clickable pre-filled command for this by running `trigger ckb.run` to see which arguments are missing.
 - You can have multiple areas pre-generating at the same time, but they're still sharing CPU time so it's not going to go any faster.
 - Pre-generation state should be preserved between crashes and relogs, however **changing the world spawn may halt any ongoing pre-generation**. This is because the entities that record pre-generation state are moved to world spawn between each tick. It is recommended that you wait until pre-generation is complete before changing the world spawn.
+- You can run `function chunkbuster:-user\002_cancel` to cancel all ongoing pre-generation.
 
 ## FAQ
 ### What does it do?

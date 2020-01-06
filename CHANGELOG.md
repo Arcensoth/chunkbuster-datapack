@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 ### Added
 - Bossbar to display current progress
+- User function to cancel ongoing pre-gen
 ### Changed
 - Added showcase image to readme
 
