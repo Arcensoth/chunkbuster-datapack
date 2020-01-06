@@ -7,8 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Bossbar to display current progress
 - User function to cancel ongoing pre-gen
-### Changed
-- Added showcase image to readme
+- Showcase image to readme
 
 ## [0.0.2] - 2019-12-24
 ### Changed
