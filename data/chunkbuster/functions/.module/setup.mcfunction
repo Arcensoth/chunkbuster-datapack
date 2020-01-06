@@ -20,3 +20,5 @@ scoreboard objectives add ckb.zleftchk dummy
 bossbar add chunkbuster:progress "Chunkbuster"
 bossbar set chunkbuster:progress style notched_10
 bossbar set chunkbuster:progress color green
+
+function chunkbuster:load/set_constants
