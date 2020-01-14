@@ -19,9 +19,7 @@ Lag-friendly and CPU-optimized chunk pre-generator.
 3. Run `function chunkbuster:-user/001_admin` to gain access to the pre-generation trigger.
 
 ### Dependencies
-Datapack        | Version
---------------- | -------
-[Tickbuster]    | `v0.1.0`
+- [Tickbuster `v0.1.0`](https://github.com/Arcensoth/tickbuster-datapack/releases/tag/v0.1.0)
 
 ## Usage
 - Make sure you've gone through the [installation and set-up steps](#installation).
