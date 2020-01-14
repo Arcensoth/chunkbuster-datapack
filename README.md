@@ -46,4 +46,4 @@ It uses [Tickbuster] to generate chunks at the sub-tick level, teleporting aroun
 [github-release-badge]: https://img.shields.io/github/release/Arcensoth/chunkbuster-datapack.svg?logo=github
 [Tickbuster]: https://github.com/Arcensoth/tickbuster-datapack
 
-[tickbuster-dependency-badge]: https://img.shields.io/static/v1?color=blue&logo=github&label=Tickbuster&message=v0.1.0
+[tickbuster-dependency-badge]: https://img.shields.io/static/v1?color=blue&logo=github&label=tickbuster&message=v0.1.0
