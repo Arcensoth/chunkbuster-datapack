@@ -15,7 +15,7 @@ Lag-friendly and CPU-optimized chunk pre-generator.
 
 ## Installation
 1. Download and install the [dependencies](#dependencies) to your world.
-2. Run `function chunkbuster:.module/setup` to add required scoreboard objectives.
+2. Run `function chunkbuster:.module/setup` to initialize the module.
 3. Run `function chunkbuster:-user/001_admin` to gain access to the pre-generation trigger.
 
 ### Dependencies
