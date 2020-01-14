@@ -9,6 +9,6 @@
   "scorespace": "ckb",
   "url": "https://github.com/Arcensoth/chunkbuster-datapack",
   "authors": [{ "name": "Arcensoth", "url": "https://github.com/Arcensoth" }],
-  "dependencies": [],
+  "dependencies": [{ "namespace": "tickbuster", "version": "0.1" }],
   "module_format": 1
 }
